@@ -23,6 +23,7 @@ public class HelloPiProducer implements Serializable {
         }
 
         JavaRDD<Integer> dataSet = jsc.parallelize(l, slices);
+        int count = 1;
 
         /*
         int count = dataSet.map(new Function<Integer, Integer>() {
