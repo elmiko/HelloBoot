@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HelloPiProducer implements Serializable {
-    public String GetPi() {
+    public static String GetPi() {
         SparkConf sparkConf = new SparkConf().setAppName("JavaSparkPi");
         JavaSparkContext jsc = new JavaSparkContext(sparkConf);
 
