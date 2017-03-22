@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HelloPiProducer implements Serializable {
-    class Func1 implements Function<Integer, Integer> {
+    class Func1 implements Function<Integer, Integer>, Serializable {
         public Integer call(Integer integer) {
             double x = Math.random() * 2 - 1;
             double y = Math.random() * 2 - 1;
@@ -19,7 +19,7 @@ public class HelloPiProducer implements Serializable {
         }
     }
 
-    class Func2 implements Function2<Integer, Integer, Integer> {
+    class Func2 implements Function2<Integer, Integer, Integer>, Serializable {
         public Integer call(Integer integer, Integer integer2) {
             return integer + integer2;
         }
