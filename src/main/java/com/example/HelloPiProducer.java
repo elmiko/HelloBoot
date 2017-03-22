@@ -1,30 +1,13 @@
 package com.example;
 
-import org.apache.spark.SparkConf;
-import org.apache.spark.api.java.JavaRDD;
-import org.apache.spark.api.java.JavaSparkContext;
-import org.apache.spark.api.java.function.Function;
-import org.apache.spark.api.java.function.Function2;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.spark.SparkConf;
+import org.apache.spark.api.java.JavaRDD;
+import org.apache.spark.api.java.JavaSparkContext;
 
 public class HelloPiProducer implements Serializable {
-    class Func1 implements Function<Integer, Integer>, Serializable {
-        public Integer call(Integer integer) {
-            double x = 1.0; // Math.random() * 2 - 1;
-            double y = 1.0; //Math.random() * 2 - 1;
-            return (x * x + y * y < 1) ? 1 : 0;
-        }
-    }
-
-    class Func2 implements Function2<Integer, Integer, Integer>, Serializable {
-        public Integer call(Integer integer, Integer integer2) {
-            return integer + integer2;
-        }
-    }
-
     public String GetPi() {
         SparkConf sparkConf = new SparkConf().setAppName("JavaSparkPi");
         JavaSparkContext jsc = new JavaSparkContext(sparkConf);
@@ -38,7 +21,7 @@ public class HelloPiProducer implements Serializable {
 
         JavaRDD<Integer> dataSet = jsc.parallelize(l, slices);
 
-        int count = dataSet.map(new Func1()).reduce(new Func2());
+        int count = dataSet.map(new MapFunc()).reduce(new ReduceFunc());
 
         /*
         int count = dataSet.map(new Function<Integer, Integer>() {
