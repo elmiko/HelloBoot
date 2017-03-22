@@ -11,6 +11,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HelloPiProducer implements Serializable {
+    class Func1 implements Function<Integer, Integer> {
+        public Integer call(Integer integer) {
+            double x = Math.random() * 2 - 1;
+            double y = Math.random() * 2 - 1;
+            return (x * x + y * y < 1) ? 1 : 0;
+        }
+    }
+
+    class Func2 implements Function2<Integer, Integer, Integer> {
+        public Integer call(Integer integer, Integer integer2) {
+            return integer + integer2;
+        }
+    }
+
     public String GetPi() {
         SparkConf sparkConf = new SparkConf().setAppName("JavaSparkPi");
         JavaSparkContext jsc = new JavaSparkContext(sparkConf);
@@ -23,23 +37,8 @@ public class HelloPiProducer implements Serializable {
         }
 
         JavaRDD<Integer> dataSet = jsc.parallelize(l, slices);
-        Function<Integer, Integer> func1 = new Function<Integer, Integer>() {
-            @Override
-            public Integer call(Integer integer) {
-                double x = Math.random() * 2 - 1;
-                double y = Math.random() * 2 - 1;
-                return (x * x + y * y < 1) ? 1 : 0;
-            }
-        };
 
-        Function2<Integer, Integer, Integer> func2 = new Function2<Integer, Integer, Integer> () {
-            @Override
-            public Integer call(Integer integer, Integer integer2) {
-                return integer + integer2;
-            }
-        };
-
-        int count = dataSet.map(func1).reduce(func2);
+        int count = dataSet.map(new Func1()).reduce(new Func2());
 
         /*
         int count = dataSet.map(new Function<Integer, Integer>() {
