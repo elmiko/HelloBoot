@@ -23,6 +23,22 @@ public class HelloPiProducer implements Serializable {
         }
 
         JavaRDD<Integer> dataSet = jsc.parallelize(l, slices);
+        Function<Integer, Integer> func1 = new Function<Integer, Integer>() {
+            @Override
+            public Integer call(Integer integer) {
+                double x = Math.random() * 2 - 1;
+                double y = Math.random() * 2 - 1;
+                return (x * x + y * y < 1) ? 1 : 0;
+            }
+        };
+
+        Function2<Integer, Integer, Integer> func2 = new Function2<Integer, Integer, Integer> () {
+            @Override
+            public Integer call(Integer integer, Integer integer2) {
+                return integer + integer2;
+            }
+        };
+
         int count = 1;
 
         /*
