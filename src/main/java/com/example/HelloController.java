@@ -8,7 +8,8 @@ public class HelloController {
 
     @RequestMapping("/")
     public String index() {
-        return "Hello from Spring Boot!";
+        HelloPiProducer pi = new HelloPiProducer();
+        return pi.GetPi();
     }
 
 }
