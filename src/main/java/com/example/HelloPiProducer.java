@@ -13,8 +13,8 @@ import java.util.List;
 public class HelloPiProducer implements Serializable {
     class Func1 implements Function<Integer, Integer>, Serializable {
         public Integer call(Integer integer) {
-            double x = Math.random() * 2 - 1;
-            double y = Math.random() * 2 - 1;
+            double x = 1.0; // Math.random() * 2 - 1;
+            double y = 1.0; //Math.random() * 2 - 1;
             return (x * x + y * y < 1) ? 1 : 0;
         }
     }
