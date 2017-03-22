@@ -39,7 +39,7 @@ public class HelloPiProducer implements Serializable {
             }
         };
 
-        int count = 1;
+        int count = dataSet.map(func1).reduce(func2);
 
         /*
         int count = dataSet.map(new Function<Integer, Integer>() {
