@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HelloPiProducer implements Serializable {
-    public static String GetPi() {
+    public String GetPi() {
         SparkConf sparkConf = new SparkConf().setAppName("JavaSparkPi");
         JavaSparkContext jsc = new JavaSparkContext(sparkConf);
 
@@ -24,6 +24,7 @@ public class HelloPiProducer implements Serializable {
 
         JavaRDD<Integer> dataSet = jsc.parallelize(l, slices);
 
+        /*
         int count = dataSet.map(new Function<Integer, Integer>() {
             @Override
             public Integer call(Integer integer) {
@@ -37,6 +38,7 @@ public class HelloPiProducer implements Serializable {
                 return integer + integer2;
             }
         });
+        */
 
         String ret = "Pi is rouuuughly " + 4.0 * count / n;
 
