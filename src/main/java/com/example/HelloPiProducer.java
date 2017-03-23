@@ -10,7 +10,7 @@ import org.apache.spark.api.java.JavaSparkContext;
 public class HelloPiProducer implements Serializable {
     public String GetPi() {
         SparkConf sparkConf = new SparkConf().setAppName("JavaSparkPi");
-        //sparkConf.setJars(new String[]{"/opt/app-root/src/HelloBoot-0.0.1-SNAPSHOT.jar"});
+        sparkConf.setJars(new String[]{"/opt/app-root/src/HelloBoot-0.0.1-SNAPSHOT.jar"});
         JavaSparkContext jsc = new JavaSparkContext(sparkConf);
 
         int slices = 2;
@@ -28,13 +28,14 @@ public class HelloPiProducer implements Serializable {
         // works
         //int count = dataSet.collect().size();
 
+        /*
         int count = dataSet.map(integer -> {
             double x = Math.random() * 2 - 1;
             double y = Math.random() * 2 - 1;
             return (x * x + y * y < 1) ? 1 : 0;
         }).reduce((integer, integer2) -> integer + integer2);
+        */
 
-        /*
         int count = dataSet.map(new Function<Integer, Integer>() {
             @Override
             public Integer call(Integer integer) {
@@ -48,7 +49,6 @@ public class HelloPiProducer implements Serializable {
                 return integer + integer2;
             }
         });
-        */
 
         String ret = "Pi is rouuuughly " + 4.0 * count / n;
 
