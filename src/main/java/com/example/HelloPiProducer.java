@@ -21,8 +21,17 @@ public class HelloPiProducer implements Serializable {
 
         JavaRDD<Integer> dataSet = jsc.parallelize(l, slices);
 
+        // does not work
         //int count = dataSet.map(new MapFunc()).reduce(new ReduceFunc());
-        int count = dataSet.collect().size();
+
+        // works
+        //int count = dataSet.collect().size();
+
+        int count = dataSet.map(integer -> {
+            double x = Math.random() * 2 - 1;
+            double y = Math.random() * 2 - 1;
+            return (x * x + y * y < 1) ? 1 : 0;
+        }).reduce((integer, integer2) -> integer + integer2);
 
         /*
         int count = dataSet.map(new Function<Integer, Integer>() {
