@@ -8,8 +8,9 @@ public class HelloController {
 
     @RequestMapping("/")
     public String index() {
-        HelloPiProducer pi = new HelloPiProducer();
-        return pi.GetPi();
+        //HelloPiProducer pi = new HelloPiProducer();
+        //return pi.GetPi();
+        return "Hello from sprintboot";
     }
 
 }
