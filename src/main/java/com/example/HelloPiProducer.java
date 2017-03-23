@@ -10,7 +10,7 @@ import org.apache.spark.api.java.JavaSparkContext;
 public class HelloPiProducer implements Serializable {
     public String GetPi() {
         SparkConf sparkConf = new SparkConf().setAppName("JavaSparkPi");
-        sparkConf.setJars(new String[]{"/opt/app-root/src/HelloBoot-0.0.1-SNAPSHOT.jar"});
+        //sparkConf.setJars(new String[]{"/opt/app-root/src/HelloBoot-0.0.1-SNAPSHOT.jar"});
         JavaSparkContext jsc = new JavaSparkContext(sparkConf);
 
         int slices = 2;
